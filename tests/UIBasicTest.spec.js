@@ -20,13 +20,14 @@
 //       await expect(page).toHaveTitle("Google");
 //     });
 
-test('Error login', async({browser})=>
+test('First test cases', async({browser})=>
 {
 
   const context = await browser.newContext();
   const page = await context.newPage();
   const userName = page.locator('#user-name');
   const signIn = page.locator("#login-button");
+  const cardTitles = page.locator(".inventory_item_name")
   await page.goto("https://www.saucedemo.com/");
 
   // css
@@ -34,19 +35,25 @@ test('Error login', async({browser})=>
   await page.locator("[type='password']").type("secret_sauce");
   await signIn.click();
 
-  await userName.fi("");
-  await userName.fi("standard_user");
+  await userName.fill("");
+  await userName.fill("standard_user");
   await signIn.click();
+
+  // console.log(await cardTitles.first().textContent());
+//  console.log(await page.locator(".inventory_item a").nth(0).textContent());
+  const allTitles = await cardTitles.allTextContents();
+  console.log(allTitles);
+
 
 });
 
 
- test.only('First test case',async ({browser})=>
+//  test('First test case',async ({browser})=>
 
- {
-//    chrome -> plugins, cookies
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    await page.goto("https://www.saucedemo.com/");
-    console.log(await page.title());
- });
+//  {
+// //    chrome -> plugins, cookies
+//     const context = await browser.newContext();
+//     const page = await context.newPage();
+//     await page.goto("https://www.saucedemo.com/");
+//     console.log(await page.title());
+//  });
